@@ -6,6 +6,31 @@ const createProductIntoDB = async (product: IProduct) => {
   return result;
 };
 
+const getAllProductsFromDB = async () => {
+  const result = await ProductModel.find();
+  return result;
+};
+
+const getProductByIdFromDB = async (productId: string) => {
+  const result = await ProductModel.findById(productId);
+  return result;
+};
+
+const updateProductIntoDB = async (productId: string, data: IProduct) => {
+  const updateProduct = await ProductModel.updateOne({}, data);
+  return updateProduct;
+};
+
+const deleteProductFromDB = async (productId: string) => {
+  const deleteInfo = await ProductModel.deleteOne({ _id: productId });
+  console.log(deleteInfo);
+  return deleteInfo;
+};
+
 export const productServices = {
   createProductIntoDB,
+  getAllProductsFromDB,
+  getProductByIdFromDB,
+  updateProductIntoDB,
+  deleteProductFromDB,
 };
