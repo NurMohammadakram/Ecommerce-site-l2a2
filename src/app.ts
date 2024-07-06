@@ -4,7 +4,10 @@ import cors from 'cors';
 const app: Application = express();
 // parsers
 app.use(express.json());
-app.use(cors);
+app.use(cors());
+
+// product routers
+app.use('/api/products');
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');

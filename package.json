@@ -2,9 +2,9 @@
   "name": "ecommerce-site-l2a2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/server.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --watch",
     "start:prod": "node ./dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "lint": "eslint .",
