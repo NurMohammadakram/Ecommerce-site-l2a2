@@ -6,11 +6,21 @@
 
 ## To start the project in production
 
-    "start": "node ./dist/server.js"
+    "start:prod": "node ./dist/server.js"
 
 ## To convert typeScript to Js
 
     "build": "tsc --watch",
+
+## eslint for linting
+
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+
+## prettier
+
+    "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
+    "prettier:fix": "prettier --write src"
 
 # API request endPoints
 
