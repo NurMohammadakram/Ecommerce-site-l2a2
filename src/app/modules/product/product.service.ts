@@ -27,7 +27,6 @@ const deleteProductFromDB = async (productId: string) => {
 };
 
 const searchProductByTextFromDB = async (searchTerm: string) => {
-  console.log('from service file: ', searchTerm);
   const result = await ProductModel.find({ $text: { $search: searchTerm } });
   return result;
 };
