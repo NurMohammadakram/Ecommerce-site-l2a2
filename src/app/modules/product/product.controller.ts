@@ -18,6 +18,18 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
+    const searchTerm = req.query.searchTerm?.toString();
+    if (searchTerm) {
+      const searchResult = await productServices.searchProductByTextFromDB(
+        searchTerm as string,
+      );
+
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term ${searchTerm} fetched successfully!`,
+        data: searchResult,
+      });
+    }
     const products = await productServices.getAllProductsFromDB();
 
     res.status(200).json({
@@ -79,10 +91,36 @@ const deleteProduct = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+// ### tried this, but it conflicted with the route of getAllProduct. If you want to have a look, so i did not delete this! ###
+
+// const searchProductByText = async (req: Request, res: Response) => {
+//   try {
+//     const searchTerm = req.query.searchTerm?.toString();
+//     if (!searchTerm) {
+//       return res.status(400).send({
+//         success: false,
+//         message: 'Search term is empty! search term is required',
+//       });
+//     }
+//     const searchResult = await productServices.searchProductByTextFromDB(
+//       searchTerm as string,
+//     );
+
+//     res.status(200).json({
+//       success: true,
+//       message: `Products matching search term ${searchTerm} fetched successfully!`,
+//       data: searchResult,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 export const productControllers = {
   createProduct,
   getAllProduct,
   getProductById,
   updateProduct,
   deleteProduct,
+  // searchProductByText,
 };

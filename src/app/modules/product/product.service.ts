@@ -17,20 +17,25 @@ const getProductByIdFromDB = async (productId: string) => {
 };
 
 const updateProductIntoDB = async (productId: string, data: IProduct) => {
-  const updateProduct = await ProductModel.updateOne({}, data);
+  const updateProduct = await ProductModel.updateOne({ _id: productId }, data);
   return updateProduct;
 };
 
 const deleteProductFromDB = async (productId: string) => {
   const deleteInfo = await ProductModel.deleteOne({ _id: productId });
-  console.log(deleteInfo);
   return deleteInfo;
 };
 
+const searchProductByTextFromDB = async (searchTerm: string) => {
+  console.log('from service file: ', searchTerm);
+  const result = await ProductModel.find({ $text: { $search: searchTerm } });
+  return result;
+};
 export const productServices = {
   createProductIntoDB,
   getAllProductsFromDB,
   getProductByIdFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  searchProductByTextFromDB,
 };
